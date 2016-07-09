@@ -10,12 +10,12 @@ function makeFriendlyDates(arr) {
   endDate[2] = getGetOrdinal(endDate[2]).replace(/^0+/, '');
 
   var dateRange = checkDates(startDate, endDate);
-  console.log(dateRange);
 
   var finalDateRange = formatAnswer(startDate, endDate);
   console.log(finalDateRange);
-
+  return finalDateRange;
 }
+
 /*formats the endDate and startDate arrays into the final answer. 
 @param startDate - An array of strings that has the year, month and date
 @param endDate- An array of strings that has the year, month and date
@@ -23,15 +23,14 @@ function makeFriendlyDates(arr) {
 representing the friendly date range.["July 1st","4th"] and ["July 1st, 2016", "July 4th, 2018"] are both examples.
 */
 function formatAnswer(startDate, endDate) {
-  var finalDateRange = [];
+  var temp = [];
   var startStr = "";
   var endStr = "";
-  //startStr = startDate[1].concat(startDate[2]);
+
   startStr = startDate[1] + " " + startDate[2];
   if (startDate[0] !== "-") {
     startStr += ", " + startDate[0];
   }
-  console.log(startStr);
 
   if (endDate[1] !== "-") {
     endStr = endDate[1];
@@ -44,14 +43,15 @@ function formatAnswer(startDate, endDate) {
   if (endDate[0] !== "-") {
     endStr += ", " + endDate[0];
   }
-
+  startStr = startStr.trim();
+  endStr= endStr.trim();
   if (endStr === "") {
-    finalDateRange.push(startStr);
+    temp.push(startStr);
   }
   else {
-    finalDateRange.push(startStr, endStr);
+    temp.push(startStr, endStr);
   }
-  return finalDateRange;
+  return temp;
 }
 
 /***********************************************************
